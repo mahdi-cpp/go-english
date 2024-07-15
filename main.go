@@ -1,8 +1,7 @@
 package go_english
 
 import (
-	"github.com/mahdi-cpp/go-english/config"
-	"github.com/mahdi-cpp/go-english/models"
+	"go-english/config"
 )
 
 func main() {
