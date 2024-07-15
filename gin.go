@@ -24,10 +24,8 @@ func Run() {
 // this way every group of routes can be defined in their own file
 // so this one won't be so messy
 func getRoutes() {
-
-	v1 := router.Group("/v1")
-
-	addEnglishRoutes(v1)
+	v2 := router.Group("/v2")
+	addEnglishRoutes(v2)
 }
 
 func CORSMiddleware() gin.HandlerFunc {

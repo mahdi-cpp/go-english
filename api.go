@@ -119,6 +119,7 @@ func addEnglishRoutes(rg *gin.RouterGroup) {
 		fmt.Println("editLearn success")
 		c.JSON(200, "successful")
 	})
+
 	router.POST("/editOrder", func(c *gin.Context) {
 		hashtag := c.Query("hashtag")
 		order := c.Query("order")
@@ -140,6 +141,7 @@ func addEnglishRoutes(rg *gin.RouterGroup) {
 		}
 		c.JSON(200, "successful")
 	})
+
 	router.POST("/editPage", func(c *gin.Context) {
 		hashtag := c.Query("hashtag")
 		page := c.Query("page")

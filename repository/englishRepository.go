@@ -9,8 +9,30 @@ import (
 	"time"
 )
 
-func InitUser() {
-	config.DB.Create(&models.User{Username: "mahdiabdolmaleki", Email: "mahdi.cpp@gmail.com", Phone: "09355512619", Avatar: "2018-10-23_13-55-58_UTC_profile_pic.jpg", Biography: "go lang programmer"})
+type Filters struct {
+	Learn   string
+	Type    string
+	Hashtag string
+	Order   string
+}
+
+type EnglishEntity struct {
+	//Category Category
+	Words []models.Word
+	Count int64
+}
+
+func ConnectDatabase() {
+	config.Database()
+	err := config.DB.AutoMigrate(&models.User{})
+	if err != nil {
+		return
+	}
+}
+
+func CreatNewUser() {
+	//models.CreatUsers()
+	models.QueryUsers()
 }
 
 func InitCategory() {
@@ -30,6 +52,76 @@ func InitCategory() {
 	config.DB.Create(&models.Category{Hashtag: "Movie"})
 	config.DB.Create(&models.Category{Hashtag: "WestWorld"})
 }
+
+func upgradeDatabase() {
+
+	//englishes := repository.GetEnglishMultiPersian()
+	//for i := 0; i < len(englishes); i++ {
+	//	parts := strings.Split(englishes[i].Persian1, "-")
+	//	fmt.Println(parts[0])
+	//	repository.SetEnglishUpdatePersians(englishes[i].ID, parts[0])
+	//}
+
+	//englishes := repository.GetEnglishAllRows()
+	//for i := 0; i < len(englishes); i++ {
+	//	var tags []string
+	//	if englishes[i].University == true {
+	//		tags = append(tags, "University")
+	//	}
+	//	if englishes[i].AEF == true {
+	//		tags = append(tags, "American English File")
+	//	}
+	//	if englishes[i].Oxford == true {
+	//		tags = append(tags, "Oxford")
+	//	}
+	//	if englishes[i].Finance == true {
+	//		tags = append(tags, "Finance")
+	//	}
+	//	if englishes[i].Medium == true {
+	//		tags = append(tags, "Medium")
+	//	}
+	//	if englishes[i].Programing == true {
+	//		tags = append(tags, "Programing")
+	//	}
+	//	if englishes[i].Word504 == true {
+	//		tags = append(tags, "Word504")
+	//	}
+	//	//fmt.Println(tags)
+	//	err := repository.SetEnglishUpdateTags(englishes[i].ID, tags)
+	//	if err != nil {
+	//		return
+	//	}
+	//}
+
+	//englishes := repository.GetEnglishAllRows()
+	//for i := 0; i < len(englishes); i++ {
+	//	var persians []string
+	//	if  len(englishes[i].Persian1) > 0 {
+	//		persians = append(persians, englishes[i].Persian1)
+	//	}
+	//	if  len(englishes[i].Persian2) > 0 {
+	//		persians = append(persians, englishes[i].Persian2)
+	//	}
+	//	if  len(englishes[i].Persian3) > 0 {
+	//		persians = append(persians, englishes[i].Persian3)
+	//	}
+	//	if  len(englishes[i].Persian4) > 0 {
+	//		persians = append(persians, englishes[i].Persian4)
+	//	}
+	//	if  len(englishes[i].Persian5) > 0 {
+	//		persians = append(persians, englishes[i].Persian5)
+	//	}
+	//
+	//	//fmt.Println(persians)
+	//	err := repository.SetEnglishUpdatePersians(englishes[i].ID, persians)
+	//	if err != nil {
+	//		return
+	//	}
+	//}
+
+}
+
+//----------------------------------------
 
 func AddWord(word models.Word) error {
 	err := config.DB.Debug().Create(&word).Error
@@ -114,6 +206,7 @@ func EditLearn(hashtag string, learn string) error {
 	}
 	return nil
 }
+
 func EditOrder(hashtag string, order string) error {
 	var update = map[string]interface{}{
 		"Order": order,
@@ -124,6 +217,7 @@ func EditOrder(hashtag string, order string) error {
 	}
 	return nil
 }
+
 func EditType(hashtag string, kind string) error {
 	var update = map[string]interface{}{
 		"Type": kind,
@@ -135,6 +229,7 @@ func EditType(hashtag string, kind string) error {
 	}
 	return nil
 }
+
 func EditPage(hashtag string, page string) error {
 
 	if hashtag == "All" { // Always show first page for search result
@@ -160,9 +255,10 @@ func GetCategory(hashtag string) (models.Category, error) {
 	fmt.Println(category)
 	return category, nil
 }
-func GetWords(hashtag string, search string) (models.EnglishEntity, error) {
 
-	var entity models.EnglishEntity
+func GetWords(hashtag string, search string) (EnglishEntity, error) {
+
+	var entity EnglishEntity
 	var category models.Category
 	var words []models.Word
 	var where = ""
@@ -172,7 +268,7 @@ func GetWords(hashtag string, search string) (models.EnglishEntity, error) {
 
 	err := config.DB.Debug().Where("hashtag", hashtag).Find(&category).Error
 	if err != nil {
-		return models.EnglishEntity{}, err
+		return EnglishEntity{}, err
 	}
 
 	println("Category:", category.Hashtag)
