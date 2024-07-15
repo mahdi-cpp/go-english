@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go-english/models"
-	"go-english/repository"
+	"github.com/mahdi-cpp/go-english/models"
+	"github.com/mahdi-cpp/go-english/repository"
 	"strconv"
 	"strings"
 )

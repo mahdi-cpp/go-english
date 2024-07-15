@@ -1,17 +1,18 @@
 package go_english
 
-import (
-	"go-english/config"
-)
+import "fmt"
 
 func main() {
 
-	config.InitEnglishDatabase()
+	//config.InitEnglishDatabase()
 	//repository.InitUser()
 	//repository.InitCategory()
 	//repository.CreatPasswords()
 
-	Run()
+	fmt.Println("Start go-english")
+	fmt.Println("Start go-english")
+
+	//Run()
 }
 
 func upgradeDatabase() {

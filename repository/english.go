@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"english/config"
-	"english/models"
 	"fmt"
+	"github.com/mahdi-cpp/go-english/config"
+	"github.com/mahdi-cpp/go-english/models"
 	"gorm.io/gorm"
 	"strings"
 	"time"

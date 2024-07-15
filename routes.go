@@ -17,7 +17,7 @@ func Run() {
 	}
 	router.Use(CORSMiddleware())
 	getRoutes()
-	router.Run(":8095")
+	router.Run(":8099")
 }
 
 // getRoutes will create our routes of our entire application
