@@ -1,4 +1,4 @@
-package go_english
+package main
 
 import (
 	"fmt"

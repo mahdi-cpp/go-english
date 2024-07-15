@@ -12,11 +12,11 @@ var err error
 
 func InitEnglishDatabase() {
 	DB, err = gorm.Open(postgres.New(postgres.Config{
-		DSN:                  "host=PostgreSQL user=mahdi password=aliali dbname=shopgram port=5432 sslmode=disable",
+		DSN:                  "host=PostgreSQL user=mahdi password=aliali dbname=english port=5432 sslmode=disable",
 		PreferSimpleProtocol: true,
 	}), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix:   "english.", // schema name
+			TablePrefix:   "api_v1.", // schema name
 			SingularTable: false,
 		}})
 

@@ -1,6 +1,4 @@
-package go_english
-
-import "fmt"
+package main
 
 func main() {
 
@@ -9,10 +7,7 @@ func main() {
 	//repository.InitCategory()
 	//repository.CreatPasswords()
 
-	fmt.Println("Start go-english")
-	fmt.Println("Start go-english")
-
-	//Run()
+	Run()
 }
 
 func upgradeDatabase() {
